@@ -1,0 +1,526 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+}
+
+.spicy-rice-regular {
+    font-family: "Spicy Rice", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.funnel-sans-main {
+    font-family: "Funnel Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+html{
+    font-size: 16px;
+}
+
+header{
+    background-color: #F7F4F3;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+    font-family: 'Funnel Sans';
+}
+
+.title{
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.title .dot {
+    height: 70px;
+    width: 70px;
+    background-color: #F4D35E;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 20px;
+}
+
+.title h1{
+    color: #FF312E;
+    font-family:'Spicy Rice';
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+nav{
+    align-items: center;
+    margin-right: 50px;
+}
+
+nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+}
+
+nav li{
+    font-family: "Funnel Sans";
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #28AFB0;
+    text-decoration: none;
+    margin: 10px 20px;
+}
+
+.current-page{
+    text-decoration: underline;
+}
+
+.body{
+    background-color: #131515;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 50px 0;
+    min-height: 100%;
+}
+
+.about{
+    width: 50%;
+    color:#F7F4F3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 90px;
+}
+
+h2{
+    color:#F4D35E;
+    font-family: 'Funnel Sans';
+    font-size: 3rem;
+    text-align: center;
+    margin: 40px 0;
+}
+
+h2 b{
+    font-family: 'Funnel Sans';
+    font-size: 3.4rem;
+    font-style: italic;
+    color:#F7F4F3;
+}
+
+p{
+    background-color: #F7F4F3;
+    color: #131515;
+    font-family: 'Funnel Sans';
+    font-size: 1.6rem;
+    width: 80%;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 40px;
+}
+
+p b{
+    font-family: 'Funnel Sans';
+    color: #28AFB0;
+}
+
+button{
+    background-color: #F4D35E;
+    color:#131515;
+    padding: 0 30px 10px 30px;
+    font-family: 'Funnel Sans';
+    font-size: 2.5rem;
+    font-weight: 800;
+    border-radius: 30px;
+    margin-top: 30px;
+    transition: 0.2s color;
+}
+
+.leaderboard{
+    background-color: #F7F4F3;
+    border-radius: 40px;
+    width: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 180px;
+}
+
+.leaderboard h3{
+    font-family: 'Funnel Sans';
+    font-size: 2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.leaderboard ol{
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.leaderboard li::marker{
+    color: #FF312E;
+}
+
+.leaderboard li{
+    color: #131515;
+    font-family: 'Funnel Sans';
+    font-size: 1.4rem;
+    margin: 10px 0;
+}
+
+.characters{
+    border:20px solid #FF312E;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 750px;
+}
+
+.character1{
+    background-color: #131515;
+    width: 750px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.character1 a{
+    color:#F4D35E;
+}
+
+.character2{
+    background-color: #F4D35E;
+    width: 750px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.character2 a{
+    color:#131515;
+}
+
+.character3{
+    background-color: #28AFB0;
+    width: 750px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.character3 a{
+    color:#131515;
+}
+
+.characters h3{
+    font-family: 'Funnel Sans';
+    font-size: 2rem;
+}
+
+.characters h3:hover{
+    text-decoration: underline;
+}
+
+.thumbnail{
+    margin: 0 35px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+.thumbnail img{
+    width: 100%;
+}
+
+.rectangle{
+    margin: 0 auto;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.upper{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+}
+
+.upper-left{
+    background-color: #28AFB0;
+    width: 200px;
+    height: 100%;
+}
+
+#page-pic{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin: 25px;
+}
+
+#page-pic img{
+    width: 100%;
+    height:fit-content;
+}
+
+.upper-right{
+    background-color: #F4D35E;
+    width: 600px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    border: 20px solid #F7F4F3;
+}
+
+.name{
+    color:#131515;
+    margin: 0 auto;
+}
+
+.lower{
+    height: 430px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.lower-left{
+    width: 200px;
+    background-color: #F4D35E;
+    height: 430px;
+}
+
+.lower-right{
+    height: 390px;
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:#131515;
+    background-color: #F7F4F3;
+    border: 20px solid #28AFB0;
+}
+
+.lower-right ul{
+    margin-top: 45px;
+    width: 75%;
+}
+
+.lower-right li{
+    font-family: 'Funnel Sans';
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+.lower-right b{
+    color:#FF312E;
+    font-family: 'Funnel Sans';
+    font-size: 1.8rem;
+}
+
+#game-body{
+    background-color: #131515;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0;
+    align-items: center;
+}
+
+.user-info{
+    color:#28AFB0;
+    width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.user-info h3{
+    font-family: 'Funnel Sans';
+    font-size: 2rem;
+}
+
+.user-info b{
+    font-family: 'Funnel Sans';
+}
+
+.social-circle{
+    border: 20px solid #FF312E;
+    border-bottom: 0;
+    width: 900px;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color:#F4D35E;
+    transition: 0.2s background-color;
+}
+
+.social-circle:hover{
+    background-color: #F4D35E;
+    color:#131515;
+}
+
+.selected-circle{
+    background-color: #F4D35E;
+    color: #131515;
+}
+
+#social-circle-bottom{
+    border: 20px solid #FF312E;
+}
+
+.character{
+    display: flex;
+    flex-direction:column;
+    align-content: center;
+}
+
+.character h4{
+    width: fit-content;
+    align-self: center;
+}
+
+.game-pic{
+    height:100px;
+    width: 100px;
+    overflow: hidden;
+    margin: 12px auto;
+    margin-bottom: 3px;
+}
+
+.game-pic img{
+    width: 100%;
+    height: fit-content;
+}
+
+.character h4{
+    font-family: 'Funnel Sans';
+    font-size: 1.5rem;
+}
+
+.action-button{
+    font-size: 1.7rem;
+    padding: 0 25px 5px 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: 0.2s background-color;
+}
+
+.action-button:hover{
+    background-color: #28AFB0;
+}
+
+.login-box{
+    background-color: #F7F4F3;
+    border-radius: 40px;
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 100px auto;
+    height: fit-content;
+    border: 15px solid #F4D35E;
+}
+
+.login-box form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-box input{
+    padding: 5px;
+    margin: 10px 0;
+    font-family: 'Funnel Sans';
+    font-size: 1.2rem;
+    color:#131515;
+    border-radius: 10px;
+}
+
+.login-box input[type=submit]{
+    background-color: #28AFB0;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.login-box a{
+    text-decoration: underline;
+    color:#28AFB0;
+}
+
+#account-body{
+    flex-direction: column;
+}
+
+.account-info{
+    margin: 0 auto;
+    margin-top: 50px;
+    background-color: #F7F4F3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: 600px;
+    border:20px solid #F4D35E;
+}
+
+.info{
+    height: 100px;
+    width: 100%;
+    background-color: #28AFB0;
+    color: #131515;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#info2{
+    background-color: #131515;
+    color:#28AFB0;
+}
+
+.info h3{
+    font-family: 'Funnel Sans';
+    font-size: 2rem;
+    margin-left: 10px;
+}
+
+.buttons{
+    margin: 0 auto;
+}
+
+.buttons button{
+    font-size: 1.7rem;
+    padding-top: 7px;
+    margin: 0 10px;
+    margin-top: 20px;
+    background-color: #FF312E;
+    color:#131515;
+    border:none;
+    transition: 0.2s color;
+}
+
+button:hover{
+    color:white;
+}
