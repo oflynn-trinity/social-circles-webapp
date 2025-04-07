@@ -15,7 +15,7 @@ CREATE TABLE Account (
 -- Create the Character table (optionally link characters to accounts)
 CREATE TABLE Character (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    account_id INT,  -- Optional: Link a character to an account
+    --account_id INT,  -- Optional: Link a character to an account
     name VARCHAR(50) NOT NULL,
     thumbnail_url VARCHAR(150),
     likes_compliments TINYINT(1) DEFAULT 0,
