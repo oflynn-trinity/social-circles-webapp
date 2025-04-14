@@ -2,6 +2,11 @@
 CREATE DATABASE IF NOT EXISTS GameDB;
 USE GameDB;
 
+DROP TABLE IF EXISTS Session;
+DROP TABLE IF EXISTS `Character`;
+DROP TABLE IF EXISTS Account;
+
+
 -- Create the Account table
 CREATE TABLE Account (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -12,10 +17,9 @@ CREATE TABLE Account (
     admin TINYINT(1) DEFAULT 0    -- 0 = regular user, 1 = admin
 );
 
--- Create the Character table (optionally link characters to accounts)
-CREATE TABLE Character (
+CREATE TABLE `Character` (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    --account_id INT,  -- Optional: Link a character to an account
+    account_id INT,  -- ✅ This is the line that was missing!
     name VARCHAR(50) NOT NULL,
     thumbnail_url VARCHAR(150),
     likes_compliments TINYINT(1) DEFAULT 0,
@@ -23,6 +27,7 @@ CREATE TABLE Character (
     likes_events TINYINT(1) DEFAULT 0,
     FOREIGN KEY (account_id) REFERENCES Account(id) ON DELETE SET NULL
 );
+
 
 -- Create the Session table to log user sessions (linked to the Account table)
 CREATE TABLE Session (
