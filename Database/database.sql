@@ -2,8 +2,7 @@
 CREATE DATABASE IF NOT EXISTS GameDB;
 USE GameDB;
 
-DROP TABLE IF EXISTS Session;
-DROP TABLE IF EXISTS `Character`;
+DROP TABLE IF EXISTS 'Character';
 DROP TABLE IF EXISTS Account;
 
 
@@ -19,7 +18,6 @@ CREATE TABLE Account (
 
 CREATE TABLE `Character` (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    account_id INT,  -- ✅ This is the line that was missing!
     name VARCHAR(50) NOT NULL,
     thumbnail_url VARCHAR(150),
     likes_compliments TINYINT(1) DEFAULT 0,
@@ -29,12 +27,3 @@ CREATE TABLE `Character` (
 );
 
 
--- Create the Session table to log user sessions (linked to the Account table)
-CREATE TABLE Session (
-    session_id INT AUTO_INCREMENT PRIMARY KEY,
-    account_id INT NOT NULL,
-    token VARCHAR(255) NOT NULL,         -- A session token (could be a UUID or other token)
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    expires_at DATETIME,                   -- When the session expires
-    FOREIGN KEY (account_id) REFERENCES Account(id) ON DELETE CASCADE
-);
