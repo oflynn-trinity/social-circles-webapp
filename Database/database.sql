@@ -19,7 +19,7 @@ CREATE TABLE Account (
 
 CREATE TABLE `Character` (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    account_id INT,  -- ✅ This is the line that was missing!
+    account_id INT, 
     name VARCHAR(50) NOT NULL,
     thumbnail_url VARCHAR(150),
     likes_compliments TINYINT(1) DEFAULT 0,
