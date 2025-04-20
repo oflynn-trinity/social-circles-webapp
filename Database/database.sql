@@ -13,7 +13,6 @@ CREATE TABLE Account (
     password VARCHAR(100) NOT NULL,
     score INT DEFAULT 0,
     active TINYINT(1) DEFAULT 1,  -- 0 = inactive, 1 = active
-    admin TINYINT(1) DEFAULT 0    -- 0 = regular user, 1 = admin
 );
 
 CREATE TABLE `Character` (
