@@ -1,8 +1,23 @@
 const express = require('express');
+const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('pages/index', { title: 'Social Circles' });
+  let sql = `
+    SELECT username, score
+    FROM Account
+    ORDER BY score DESC
+    LIMIT 10;
+  `;
+
+  db.query(sql,(err,result) =>{
+    if(err) throw err;
+
+    res.render('pages/index', { 
+      title: 'Home',
+      topUsers: result
+    });
+  });
 });
 
 router.get('/account', (req, res) => {
@@ -15,6 +30,14 @@ router.get('/characters', (req, res) => {
 
 router.get('/login', (req, res) => {
   res.render('pages/login', { title: 'Login' });
+});
+
+router.get('/createaccount', (req, res) => {
+  res.render('pages/createaccount', { title : 'Create Account'});
+});
+
+router.get('/editaccount', (req, res) => {
+  res.render('pages/editaccount', { title : 'Edit Account'});
 });
 
 router.get('/play', (req, res) => {
