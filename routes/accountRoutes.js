@@ -4,7 +4,7 @@ const db = require('../db/connection');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-// ✅ Create a new account (with password hashing)
+// Create a new account (with password hashing)
 router.post('/register', (req, res) => {
   const { username, password } = req.body;
 
