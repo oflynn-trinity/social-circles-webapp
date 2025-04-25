@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS GameDB;
 USE GameDB;
 
-DROP TABLE IF EXISTS 'Character';
+DROP TABLE IF EXISTS Characters;
 DROP TABLE IF EXISTS Account;
 
 
@@ -15,7 +15,7 @@ CREATE TABLE Account (
     active TINYINT(1) DEFAULT 1,  -- 0 = inactive, 1 = active
 );
 
-CREATE TABLE `Character` (
+CREATE TABLE Characters (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     thumbnail_url VARCHAR(150),
