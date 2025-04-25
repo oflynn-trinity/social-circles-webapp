@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const indexRouter = require('./routes/index');
+const accountRoutes = require('./routes/accountRoutes');
+app.use('/account', accountRoutes);
+
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
