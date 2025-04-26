@@ -1,9 +1,19 @@
 const express = require('express');
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 const path = require('path');
+
+const session = require('express-session');
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+  }));
+
 const indexRouter = require('./routes/index');
 const accountRoutes = require('./routes/accountRoutes');
-app.use('/account', accountRoutes);
+app.use('/', accountRoutes);
 
 require('dotenv').config();
 
@@ -15,8 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/',indexRouter);
 
 // Import routes
-const sessionRoutes = require('./routes/sessionRoutes');
-app.use('/session', sessionRoutes);
+//const sessionRoutes = require('./routes/sessionRoutes');
+//app.use('/session', sessionRoutes);
 
 // Default route
 //app.get('/', (req, res) => {
