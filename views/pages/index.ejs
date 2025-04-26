@@ -1,6 +1,6 @@
 <head>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <title>Social Circles Game</title>
+    <title><%= title %>: Social Circles Game</title>
 
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,17 +37,17 @@
         </div>
         <div class="leaderboard">
             <h3>leaderboard</h3>
-            <ol>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-                <li>user</li>
-            </ol>
+            <div class="lists">
+                <ol>
+                    <% topUsers.forEach(user => { %>
+                        <li><%= user.username %></li>
+                      <% }); %>
+                </ol>
+                <ul>
+                    <% topUsers.forEach(user => { %>
+                        <li><%= user.score %></li>
+                      <% }); %>
+                </ul>
+            </div>
         </div>
     </div>

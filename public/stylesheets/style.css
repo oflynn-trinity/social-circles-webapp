@@ -151,7 +151,7 @@ button{
 .leaderboard{
     background-color: #F7F4F3;
     border-radius: 40px;
-    width: 300px;
+    width: 400px;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -166,9 +166,20 @@ button{
     margin-bottom: 10px;
 }
 
+.leaderboard .lists{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px ;
+}
+
 .leaderboard ol{
     margin-left: 10px;
     margin-bottom: 20px;
+}
+
+.leaderboard ul{
+    list-style: none;
 }
 
 .leaderboard li::marker{
@@ -508,6 +519,8 @@ button{
 
 .buttons{
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .buttons button{
@@ -519,6 +532,11 @@ button{
     color:#131515;
     border:none;
     transition: 0.2s color;
+}
+
+.buttons form{
+    height: fit-content;
+    width: fit-content;
 }
 
 button:hover{

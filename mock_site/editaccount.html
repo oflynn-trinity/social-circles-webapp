@@ -1,6 +1,6 @@
 <head>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <title>Log In - Social Circles</title>
+    <link rel="stylesheet" href="./style.css">
+    <title>Create Account - Social Circles</title>
 
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,27 +9,27 @@
 </head>
 <body>
     <header>
-        <a class="title" href="/">
+        <a class="title" href="index.html">
             <h1>SOCIAL</h1>
             <span class="dot"></span>
             <h1>CIRCLES</h1>
         </a>
         <nav>
             <ul>
-                <a href="/play"><li>play</li></a>
-                <a href="/characters"><li>characters</li></a>
-                <a href="/login"><li class="current-page">log in</li></a>
+                <a href="play.html"><li>play</li></a>
+                <a href="characters.html"><li>characters</li></a>
+                <a href="login.html"><li>log in</li></a>
             </ul>
         </nav>
     </header>
     <div class="body">
         <div class="login-box">
-            <form action="/login" method="post">
-                <input type="text" name="username" placeholder="username...">
-                <input type="password" name="password" placeholder="password...">
-                <input type="submit" value="log in">
+            <form>
+                <input type="text" placeholder="new username...">
+                <input type="password" placeholder="new password...">
+                <input type="password" placeholder="confirm password...">
+                <input type="submit" value="change username/password">
             </form>
-            <a href="/createaccount">create account</a>
         </div>
     </div>
 </body>

@@ -1,5 +1,3 @@
--- Create the database and switch to it
-CREATE DATABASE IF NOT EXISTS GameDB;
 USE GameDB;
 
 DROP TABLE IF EXISTS Characters;
@@ -19,10 +17,9 @@ CREATE TABLE Characters (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     thumbnail_url VARCHAR(150),
-    likes_compliments TINYINT(1) DEFAULT 0,
-    likes_help TINYINT(1) DEFAULT 0,
-    likes_events TINYINT(1) DEFAULT 0,
-    FOREIGN KEY (account_id) REFERENCES Account(id) ON DELETE SET NULL
+    likes_compliments INT DEFAULT 0,
+    likes_help INT DEFAULT 0,
+    likes_events INT DEFAULT 0
 );
 
 
