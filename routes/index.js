@@ -3,6 +3,9 @@ const db = require('../db/connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  let loggedIn = 0
+  if(req.session.user) loggedIn = 1;
+
   let sql = `
     SELECT username, score
     FROM Account
@@ -15,7 +18,8 @@ router.get('/', (req, res) => {
 
     res.render('pages/index', { 
       title: 'Home',
-      topUsers: result
+      topUsers: result,
+      loggedIn
     });
   });
 });
@@ -25,7 +29,12 @@ router.get('/account', (req, res) => {
 });
 
 router.get('/characters', (req, res) => {
-  res.render('pages/characters', { title: 'Characters' });
+  let loggedIn = 0
+  if(req.session.user) loggedIn = 1;
+  res.render('pages/characters', {
+    title: 'Characters',
+    loggedIn
+  });
 });
 
 router.get('/login', (req, res) => {
@@ -41,11 +50,21 @@ router.get('/editaccount', (req, res) => {
 });
 
 router.get('/play', (req, res) => {
-  res.render('pages/play', { title: 'Play Game' });
+  let loggedIn = 0
+  if(req.session.user) loggedIn = 1;
+  res.render('pages/play', { 
+    title: 'Play Game',
+    loggedIn
+  });
 });
 
 router.get('/samplecharacter', (req, res) => {
-  res.render('pages/samplecharacter', { title: 'Character' });
+  let loggedIn = 0
+  if(req.session.user) loggedIn = 1;
+  res.render('pages/samplecharacter', { 
+    title: 'Character',
+    loggedIn
+  });
 });
 
 module.exports = router;

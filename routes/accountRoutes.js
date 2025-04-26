@@ -54,4 +54,41 @@ router.post('/logout', (req, res) => {
   });
 });
 
+router.post('/change-username', (req, res) => {
+  const { newUsername } = req.body;
+  if (!req.session.user) {
+    return res.status(401).send('You must be logged in to change your username.');
+  }
+  const currentUsername = req.session.user.username;
+
+  const sql = `UPDATE Account SET username = ? WHERE username = ?`;
+  db.query(sql, [newUsername, currentUsername], (err, result) => {
+    if (err) throw err;
+
+    req.session.user.username = newUsername;
+
+    res.redirect('/account');
+  });
+});
+
+router.post('/change-password', (req, res) => {
+  const { newPassword } = req.body;
+
+  if (!req.session.user) {
+    return res.status(401).send('You must be logged in to change your password.');
+  }
+
+  const username = req.session.user.username;
+
+  bcrypt.hash(newPassword, 10, (err, newHashedPassword) => {
+    if (err) throw err;
+
+    const updateSql = `UPDATE Account SET password = ? WHERE username = ?`;
+    db.query(updateSql, [newHashedPassword, username], (err, result) => {
+      if (err) throw err;
+      res.redirect('/account');
+    });
+  });
+});
+
 module.exports = router;
