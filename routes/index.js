@@ -25,7 +25,37 @@ router.get('/', (req, res) => {
 });
 
 router.get('/account', (req, res) => {
-  res.render('pages/account', { title: 'My Account' });
+  if(!req.session.user) res.redirect('/login');
+
+  const username = req.session.user.username;
+  const sqlScore = `
+  SELECT username, score FROM Account WHERE username = ?
+  `;
+
+  db.query(sqlScore, [username], (err, scoreResult) => {
+    if(err) throw err;
+
+    const score = scoreResult[0].score;
+
+    const sqlRank = `
+      SELECT COUNT(*) + 1 AS ranking
+      FROM Account
+      WHERE score > ?
+    `;
+
+    db.query(sqlRank, [score], (err, rankResult) => {
+      if(err) throw err;
+
+      const rank = rankResult[0].ranking;
+
+      res.render('pages/account', {
+        title: 'My Account',
+        username: username,
+        score: score,
+        rank: rank
+      });
+    });
+  });
 });
 
 router.get('/characters', (req, res) => {
@@ -38,14 +68,17 @@ router.get('/characters', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+  if(req.session.user) res.redirect('/account');
   res.render('pages/login', { title: 'Login' });
 });
 
 router.get('/createaccount', (req, res) => {
+  if(req.session.user) res.redirect('/account');
   res.render('pages/createaccount', { title : 'Create Account'});
 });
 
 router.get('/editaccount', (req, res) => {
+  if(!req.session.user) res.redirect('/login');
   res.render('pages/editaccount', { title : 'Edit Account'});
 });
 
