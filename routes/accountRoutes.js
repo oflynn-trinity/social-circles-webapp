@@ -16,7 +16,7 @@ router.post('/register', (req, res) => {
       if (err) throw err;
 
       req.session.user = { username: username };
-      res.redirect('/play');
+      res.redirect('/playonline');
     });
   });
 });
@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
 
       if (isMatch) {
         req.session.user = { username: user.username };
-        res.redirect('/play');
+        res.redirect('/playonline');
       } else {
         res.send('Invalid username or password.');
       }

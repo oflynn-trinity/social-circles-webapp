@@ -95,12 +95,90 @@ router.get('/editaccount', (req, res) => {
   res.render('pages/editaccount', { title : 'Edit Account'});
 });
 
-router.get('/play', (req, res) => {
-  let loggedIn = 0
-  if(req.session.user) loggedIn = 1;
-  res.render('pages/play', { 
-    title: 'Play Game',
-    loggedIn
+router.get('/playoffline', (req, res) => {
+  if(req.session.user) res.redirect('/playonline');
+
+  const sqlChars = `
+  SELECT name, thumbnail_url, likes_compliments, likes_help, likes_events
+  FROM Characters;
+  `;
+
+  db.query(sqlChars,(err, charResult) => {
+    if(err) throw err;
+
+    let chars = [];
+
+    charResult.forEach(character => {
+      chars.push({
+        name: character.name,
+        thumbnail_url: character.thumbnail_url,
+        likes: [
+          character.likes_compliments,
+          character.likes_help,
+          character.likes_events
+        ]
+      });
+    });
+
+    res.render('pages/playoffline', { 
+      title: 'Play Game',
+      chars
+    });
+  });
+});
+
+router.get('/playonline', (req, res) => {
+  if(!req.session.user) res.redirect('/playoffline');
+  const sqlChars = `
+  SELECT name, thumbnail_url, likes_compliments, likes_help, likes_events
+  FROM Characters;
+  `;
+
+  db.query(sqlChars,(err, charResult) => {
+    if(err) throw err;
+
+    let chars = [];
+
+    charResult.forEach(character => {
+      chars.push({
+        name: character.name,
+        thumbnail_url: character.thumbnail_url,
+        likes: [
+          character.likes_compliments,
+          character.likes_help,
+          character.likes_events
+        ]
+      });
+    });
+
+    const username = req.session.user.username;
+    const sqlUser = `
+    SELECT score FROM Account WHERE username = ?;
+    `;
+
+    db.query(sqlUser, username, (err, scoreResult) => {
+      if(err) throw err;
+
+      res.render('pages/playonline', { 
+        title: 'Play Game',
+        chars,
+        username,
+        userScore: scoreResult[0].score
+      });
+    });
+  });
+});
+
+router.post('/update-score', (req, res) => {
+  const username = req.session.user.username;
+  const newScore = req.body.score; 
+
+  const sql = `UPDATE Account SET score = ? WHERE username = ?`;
+
+  db.query(sql, [newScore, username], (err, result) => {
+    if (err) throw err;
+    res.json(null);
+
   });
 });
 

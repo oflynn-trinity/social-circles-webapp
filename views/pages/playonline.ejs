@@ -16,16 +16,16 @@
         </a>
         <nav>
             <ul>
-                <a href="/play"><li class="current-page">play</li></a>
+                <a href="/playonline"><li class="current-page">play</li></a>
                 <a href="/characters"><li>characters</li></a>
-                <%- include('../partials/loginaccount') %>
+                <a href="/account"><li>account</li></a>
             </ul>
         </nav>
     </header>
     <div id="game-body">
         <div class="user-info">
-            <h3>guest</h3>
-            <h3>score : <b id="score">0</b></h3>
+            <h3><%=username%></h3>
+            <h3>score : <b id="score">0000</b></h3>
         </div>
         <div class="social-circle">
             <div class="character">
@@ -96,21 +96,11 @@
 
     <script>
 
-        const characterInfo = [
-            {name: "char1", likes: [1,1,-1]},
-            {name: "char2", likes: [-1,1,1]},
-            {name: "char3", likes: [-1,-1,1]},
-            {name: "char4", likes: [1,-1,-1]},
-            {name: "char5", likes: [1,1,1]},
-            {name: "char6", likes: [-1,-1,-1]},
-            {name: "char7", likes: [1,1,-1]},
-            {name: "char8", likes: [-1,1,-1]},
-            {name: "char9", likes: [1,-1,-1]}
-        ];
+        const characterInfo = <%- JSON.stringify(chars) %>;
 
         const characterDivs = document.querySelectorAll(".character");
         var characterMap = new Map();
-        var score = 0;
+        var score = <%= userScore %>;
 
         function generateRandomArray(n){
             let arr = new Array(n);
@@ -149,6 +139,20 @@
             });
 
             selectedCircle.classList.remove("selected-circle");
+
+            fetch('/update-score', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ score })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Score updated:', data);
+                })
+                .catch(error => console.error('Error updating score:', error));
+
         }
 
         function startRound(){
@@ -157,6 +161,7 @@
 
             for(let i = 0; i < characterDivs.length; i++){
                 characterDivs[i].lastElementChild.innerHTML = characterMap.get(characterDivs[i]).name;
+                characterDivs[i].firstElementChild.lastElementChild.setAttribute('src',characterMap.get(characterDivs[i]).thumbnail_url);
             }
         }
 
