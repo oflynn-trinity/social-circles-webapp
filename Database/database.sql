@@ -10,7 +10,7 @@ CREATE TABLE Account (
     username VARCHAR(20) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     score INT DEFAULT 0,
-    active INT DEFAULT 1
+    active TINYINT(1) DEFAULT 1  -- 0 = inactive, 1 = active
 );
 
 CREATE TABLE Characters (
@@ -22,5 +22,14 @@ CREATE TABLE Characters (
     likes_events INT DEFAULT 0
 );
 
-INSERT INTO Account (username, password)
-VALUES ('omen',1234)
+
+INSERT INTO Characters (account_id, name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
+(NULL, 'Shark', '/images/Shark.png', 1, 0, 1),
+(NULL, 'Vampire', '/images/Vampire.png', 0, 1, 1),
+(NULL, 'Booty', '/images/Booty.png', 1, 1, 0),
+(NULL, 'Alligator', '/images/Alligator.png', 0, 1, 1),
+(NULL, 'Pirate Booty', '/images/pirateBooty.png', 1, 0, 0),
+(NULL, 'Cyborg', '/images/cyborg.png', 1, 1, 1),
+(NULL, 'Fish Dude', '/images/fishDude.png', 0, 1, 0),
+(NULL, 'Grump', '/images/Grump.png', 1, 0, 1),
+(NULL, 'CS Nerd', '/images/CS Nerd.png', 1, 1, 0);
