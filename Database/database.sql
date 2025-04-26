@@ -26,3 +26,13 @@ CREATE TABLE Characters (
 );
 
 
+INSERT INTO `Character` (account_id, name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
+(NULL, 'Shark', '/images/Shark.png', 1, 0, 1),
+(NULL, 'Vampire', '/images/Vampire.png', 0, 1, 1),
+(NULL, 'Booty', '/images/Booty.png', 1, 1, 0),
+(NULL, 'Alligator', '/images/Alligator.png', 0, 1, 1),
+(NULL, 'Pirate Booty', '/images/pirateBooty.png', 1, 0, 0),
+(NULL, 'Cyborg', '/images/cyborg.png', 1, 1, 1),
+(NULL, 'Fish Dude', '/images/fishDude.png', 0, 1, 0),
+(NULL, 'Grump', '/images/Grump.png', 1, 0, 1),
+(NULL, 'CS Nerd', '/images/CS Nerd.png', 1, 1, 0);
