@@ -1,0 +1,180 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Play - Social Circles</title>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Spicy+Rice&display=swap" rel="stylesheet">    
+</head>
+<body>
+    <header>
+        <a class="title" href="/">
+            <h1>SOCIAL</h1>
+            <span class="dot"></span>
+            <h1>CIRCLES</h1>
+        </a>
+        <nav>
+            <ul>
+                <a href="/playoffline"><li class="current-page">play</li></a>
+                <a href="/characters"><li>characters</li></a>
+                <a href="/login"><li>log in</li></a>
+            </ul>
+        </nav>
+    </header>
+    <div id="game-body">
+        <div class="user-info">
+            <h3>guest</h3>
+            <h3>score : <b id="score">0</b></h3>
+        </div>
+        <div class="social-circle">
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+        </div>
+        <div class="social-circle">
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+        </div>
+        <div class="social-circle" id="social-circle-bottom">
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+            <div class="character">
+                <div class="game-pic">
+                    <img src="/images/profilepic.png">
+                </div>
+                <h4>character name</h4>
+            </div>
+        </div>
+        <div>
+            <button class="action-button" id="compliment">give a compliment</button>
+            <button class="action-button" id="help">offer help</button>
+            <button class="action-button" id="invite">invite to an event</button>
+        </div>
+    </div>
+
+    <script>
+
+        const characterInfo = <%- JSON.stringify(chars) %>;
+
+        const characterDivs = document.querySelectorAll(".character");
+        var characterMap = new Map();
+        var score = 0;
+
+        function generateRandomArray(n){
+            let arr = new Array(n);
+
+            for(let i = 0; i < n; i++){
+                arr[i] = i;
+            }
+            for(let i = 0; i < n; i++){
+                let rand = Math.floor(Math.random() * n);
+                let temp = arr[i];
+                arr[i] = arr[rand];
+                arr[rand] = temp;
+            }
+            return arr;
+        }
+
+        function updateMap(){
+            let n = characterDivs.length;
+            let arr = generateRandomArray(n);
+
+            for(let i = 0; i < n; i++){
+                characterMap.set(characterDivs[i],characterInfo[arr[i]]);
+            }
+        }
+
+        function endRound(buttonId){
+            let selectedCircle = document.querySelector(".selected-circle");
+            let selectedChars = document.querySelectorAll(".selected-circle .character");
+            let actionIndex = 2;
+
+            if (buttonId === "compliment") actionIndex = 0;
+            else if(buttonId === "help") actionIndex = 1;
+
+            selectedChars.forEach(character =>{
+                score += characterMap.get(character).likes[actionIndex];
+            });
+
+            selectedCircle.classList.remove("selected-circle");
+        }
+
+        function startRound(){
+            document.querySelector("#score").innerHTML = score;
+            updateMap();
+
+            for(let i = 0; i < characterDivs.length; i++){
+                characterDivs[i].lastElementChild.innerHTML = characterMap.get(characterDivs[i]).name;
+                characterDivs[i].firstElementChild.lastElementChild.setAttribute('src',characterMap.get(characterDivs[i]).thumbnail_url);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const circles = document.querySelectorAll(".social-circle");
+            const actions = document.querySelectorAll(".action-button");
+            startRound();
+        
+            circles.forEach(circle => {
+                circle.addEventListener("click", function () {
+
+                    circles.forEach(c => c.classList.remove("selected-circle"));
+                    this.classList.add("selected-circle");
+
+                });
+            });
+
+            actions.forEach(action => {
+                action.addEventListener("click", function () {
+                    if(document.querySelectorAll(".selected-circle").length === 1){
+                        endRound(this.id);
+                        startRound();
+                    }
+                })
+            });
+        });
+
+
+      </script>
+</body>
