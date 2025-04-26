@@ -61,9 +61,22 @@ router.get('/account', (req, res) => {
 router.get('/characters', (req, res) => {
   let loggedIn = 0
   if(req.session.user) loggedIn = 1;
-  res.render('pages/characters', {
-    title: 'Characters',
-    loggedIn
+
+  const sql = `SELECT name, thumbnail_url FROM Characters`;
+
+  db.query(sql, (err, result) => {
+    if(err) throw err;
+
+    let chars = []
+    result.forEach(row =>{
+      chars.push({name : row.name, thumbnail_url: row.thumbnail_url})
+    });
+
+    res.render('pages/characters', {
+      title: 'Characters',
+      loggedIn,
+      chars : chars
+    });
   });
 });
 
@@ -91,12 +104,31 @@ router.get('/play', (req, res) => {
   });
 });
 
-router.get('/samplecharacter', (req, res) => {
+router.get('/character/:name', (req, res) => {
+  const name = req.params.name;
   let loggedIn = 0
   if(req.session.user) loggedIn = 1;
-  res.render('pages/samplecharacter', { 
-    title: 'Character',
-    loggedIn
+
+  const sql = `
+    SELECT thumbnail_url, likes_compliments, likes_help, likes_events
+    FROM Characters
+    WHERE name = ?;
+  `;
+
+  db.query(sql, [name], (err, result) => {
+    if(err) throw err;
+
+    const character = result[0];
+
+    res.render('pages/samplecharacter', { 
+      title: 'Character',
+      loggedIn,
+      name,
+      thumbnail_url: character.thumbnail_url,
+      likes_compliments: character.likes_compliments,
+      likes_help: character.likes_help,
+      likes_events: character.likes_events
+    });
   });
 });
 

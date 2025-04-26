@@ -27,11 +27,11 @@
             <div class="upper">
                 <div class="upper-left">
                     <div id="page-pic">
-                        <img src="./profilepic.png">
+                        <img src="<%= thumbnail_url %>">
                     </div>
                 </div>
                 <div class="upper-right">
-                    <h2 class="name">character name</h2>
+                    <h2 class="name"><%=name%></h2>
                 </div>
             </div>
             <div class="lower">
@@ -41,18 +41,30 @@
                 <div class="lower-right">
                     <ul>
                         <li>
-                            h/she 
-                            <b>LOVES/HATES</b>
+                            they 
+                            <% if(likes_compliments === 1) {%>
+                            <b>LOVE</b>
+                            <%} else {%>
+                            <b>HATE</b>
+                            <%}%>
                             receiving compliments
                         </li>
                         <li>
-                            h/she 
-                            <b>LOVES/HATES</b>
+                            they 
+                            <% if(likes_help === 1) {%>
+                            <b>LOVE</b>
+                            <%} else {%>
+                            <b>HATE</b>
+                            <%}%>
                             receiving help
                         </li>
                         <li>
-                            h/she 
-                            <b>LOVES/HATES</b>
+                            they 
+                            <% if(likes_events === 1) {%>
+                            <b>LOVE</b>
+                            <%} else {%>
+                            <b>HATE</b>
+                            <%}%>
                             being invited to events
                         </li>
                     </ul>
