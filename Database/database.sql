@@ -23,13 +23,13 @@ CREATE TABLE Characters (
 );
 
 
-INSERT INTO Characters (account_id, name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
-(NULL, 'Shark', '/images/Shark.png', 1, 0, 1),
-(NULL, 'Vampire', '/images/Vampire.png', 0, 1, 1),
-(NULL, 'Booty', '/images/Booty.png', 1, 1, 0),
-(NULL, 'Alligator', '/images/Alligator.png', 0, 1, 1),
-(NULL, 'Pirate Booty', '/images/pirateBooty.png', 1, 0, 0),
-(NULL, 'Cyborg', '/images/cyborg.png', 1, 1, 1),
-(NULL, 'Fish Dude', '/images/fishDude.png', 0, 1, 0),
-(NULL, 'Grump', '/images/Grump.png', 1, 0, 1),
-(NULL, 'CS Nerd', '/images/CS Nerd.png', 1, 1, 0);
+INSERT INTO Characters (name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
+('Shark', '/images/Shark.png', 1, 0, 1),
+('Vampire', '/images/Vampire.png', 0, 1, 1),
+('Booty', '/images/Booty.png', 1, 1, 0),
+('Alligator', '/images/Alligator.png', 0, 1, 1),
+('Pirate Booty', '/images/pirateBooty.png', 1, 0, 0),
+('Cyborg', '/images/cyborg.png', 1, 1, 1),
+('Fish Dude', '/images/fishDude.png', 0, 1, 0),
+('Grump', '/images/Grump.png', 1, 0, 1),
+('CS Nerd', '/images/CSNerd.png', 1, 1, 0);

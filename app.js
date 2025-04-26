@@ -11,6 +11,8 @@ app.use(session({
     cookie: { secure: false }
   }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 const indexRouter = require('./routes/index');
 const accountRoutes = require('./routes/accountRoutes');
 app.use('/', accountRoutes);
