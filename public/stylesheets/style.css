@@ -519,6 +519,8 @@ button{
 
 .buttons{
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .buttons button{
@@ -530,6 +532,11 @@ button{
     color:#131515;
     border:none;
     transition: 0.2s color;
+}
+
+.buttons form{
+    height: fit-content;
+    width: fit-content;
 }
 
 button:hover{
