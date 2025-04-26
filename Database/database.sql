@@ -12,7 +12,7 @@ CREATE TABLE Account (
     username VARCHAR(20) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     score INT DEFAULT 0,
-    active TINYINT(1) DEFAULT 1,  -- 0 = inactive, 1 = active
+    active TINYINT(1) DEFAULT 1  -- 0 = inactive, 1 = active
 );
 
 CREATE TABLE Characters (
@@ -26,7 +26,7 @@ CREATE TABLE Characters (
 );
 
 
-INSERT INTO `Character` (account_id, name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
+INSERT INTO Characters (account_id, name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
 (NULL, 'Shark', '/images/Shark.png', 1, 0, 1),
 (NULL, 'Vampire', '/images/Vampire.png', 0, 1, 1),
 (NULL, 'Booty', '/images/Booty.png', 1, 1, 0),
