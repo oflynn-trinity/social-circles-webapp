@@ -24,12 +24,12 @@ CREATE TABLE Characters (
 
 
 INSERT INTO Characters (name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
-('Shark', '/images/Shark.png', 1, 0, 1),
-('Vampire', '/images/Vampire.png', 0, 1, 1),
-('Booty', '/images/Booty.png', 1, 1, 0),
-('Alligator', '/images/Alligator.png', 0, 1, 1),
-('Pirate Booty', '/images/pirateBooty.png', 1, 0, 0),
-('Cyborg', '/images/cyborg.png', 1, 1, 1),
-('Fish Dude', '/images/fishDude.png', 0, 1, 0),
-('Grump', '/images/Grump.png', 1, 0, 1),
-('CS Nerd', '/images/CSNerd.png', 1, 1, 0);
+('Shark', '/images/Shark.png', -1, -1, 1),
+('Vampire', '/images/Vampire.png', 1, -1, 0),
+('Booty', '/images/Booty.png', 1, 1, 1),
+('Alligator', '/images/Alligator.png', 1, -1, 1),
+('Pirate Booty', '/images/pirateBooty.png', -1, 1, 1),
+('Cyborg', '/images/cyborg.png', 1, -1, 0),
+('Fish Dude', '/images/fishDude.png', 1, 1, 1),
+('Grump', '/images/Grump.png', -1, -1, -1),
+('CS Nerd', '/images/CSNerd.png', 1, 1, -1);
