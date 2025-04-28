@@ -1,7 +1,7 @@
-The tester code runs, but app.js is trying to run the same sever again so need to fix code so that it runs on the same server instead of opening another one
 Screen size compatibility for larger or smaller screens than a laptop
 Character name alignment on gameplay pages
 Make hover color different than selection color on gameplay page
 Form errors should display a message on the current page instead of taking the user to an error page
 Add acount deletion
 Add confirm password field for account creation, editing
+Score is only going up and not decreasing if you were to pick a wrong choice
