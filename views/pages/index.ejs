@@ -33,7 +33,14 @@
                 <b>really</b>
                 likes, and compete to become the most popular player in the world
             </p>
-            <a href="/play"><button>play</button></a>
+            <a 
+            <% if (loggedIn === 1) { %>
+                href="/playonline">
+            <% } else { %>
+                href="/playoffline">
+            <% } %>
+                <button>play</button>
+            </a>
         </div>
         <div class="leaderboard">
             <h3>leaderboard</h3>
