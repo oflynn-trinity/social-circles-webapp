@@ -16,7 +16,9 @@ CREATE TABLE Account (
 CREATE TABLE Characters (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    thumbnail_url VARCHAR(150),
+    thumbnail_url VARCHAR(150),git add database.sql
+git commit -m "Small database changes: fixed character points"
+git push -u origin small-db-changes
     likes_compliments INT DEFAULT 0,
     likes_help INT DEFAULT 0,
     likes_events INT DEFAULT 0
@@ -25,11 +27,11 @@ CREATE TABLE Characters (
 
 INSERT INTO Characters (name, thumbnail_url, likes_compliments, likes_help, likes_events) VALUES
 ('Shark', '/images/Shark.png', -1, -1, 1),
-('Vampire', '/images/Vampire.png', 1, -1, 0),
+('Vampire', '/images/Vampire.png', 1, -1, -1),
 ('Booty', '/images/Booty.png', 1, 1, 1),
 ('Alligator', '/images/Alligator.png', 1, -1, 1),
 ('Pirate Booty', '/images/pirateBooty.png', -1, 1, 1),
-('Cyborg', '/images/cyborg.png', 1, -1, 0),
+('Cyborg', '/images/cyborg.png', 1, -1, 1),
 ('Fish Dude', '/images/fishDude.png', 1, 1, 1),
 ('Grump', '/images/Grump.png', -1, -1, -1),
 ('CS Nerd', '/images/CSNerd.png', 1, 1, -1);
