@@ -16,9 +16,7 @@ CREATE TABLE Account (
 CREATE TABLE Characters (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    thumbnail_url VARCHAR(150),git add database.sql
-git commit -m "Small database changes: fixed character points"
-git push -u origin small-db-changes
+    thumbnail_url VARCHAR(150),
     likes_compliments INT DEFAULT 0,
     likes_help INT DEFAULT 0,
     likes_events INT DEFAULT 0
