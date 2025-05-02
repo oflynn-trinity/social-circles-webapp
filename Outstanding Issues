@@ -1,7 +1,7 @@
-Screen size compatibility for larger or smaller screens than a laptop
-Character name alignment on gameplay pages
-Make hover color different than selection color on gameplay page
-Form errors should display a message on the current page instead of taking the user to an error page
-Add acount deletion
-Add confirm password field for account creation, editing
-Score is only going up and not decreasing if you were to pick a wrong choice
+Screen size compatibility for larger or smaller screens than a laptop (Gavin)
+Character name alignment on gameplay pages (Gavin)
+Make hover color different than selection color on gameplay page (Gavin)
+Form errors should display a message on the current page instead of taking the user to an error page (Jordan)
+Add acount deletion (August)
+Add confirm password field for account creation, editing (August)
+Score is only going up and not decreasing if you were to pick a wrong choice (Jordan)
