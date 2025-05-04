@@ -23,38 +23,40 @@
         </nav>
     </header>
     <div class="body">
-        <div class="about">
-            <h2>
-                SOMETIMES LIFE 
-                <b>IS</b> 
-                A POPULARITY CONTEST</h2>
-            <p>
-                do you have what it takes to rise to the top? optimize your social standing by figuring out what each group of friends
-                <b>really</b>
-                likes, and compete to become the most popular player in the world
-            </p>
-            <a 
-            <% if (loggedIn === 1) { %>
-                href="/playonline">
-            <% } else { %>
-                href="/playoffline">
-            <% } %>
-                <button>play</button>
-            </a>
-        </div>
-        <div class="leaderboard">
-            <h3>leaderboard</h3>
-            <div class="lists">
-                <ol>
-                    <% topUsers.forEach(user => { %>
-                        <li><%= user.username %></li>
-                      <% }); %>
-                </ol>
-                <ul>
-                    <% topUsers.forEach(user => { %>
-                        <li><%= user.score %></li>
-                      <% }); %>
-                </ul>
+        <div class ="about-leaderboard">
+            <div class="about">
+                <h2>
+                    SOMETIMES LIFE 
+                    <b>IS</b> 
+                    A POPULARITY CONTEST</h2>
+                <p>
+                    do you have what it takes to rise to the top? optimize your social standing by figuring out what each group of friends
+                    <b>really</b>
+                    likes, and compete to become the most popular player in the world
+                </p>
+                <a 
+                <% if (loggedIn === 1) { %>
+                    href="/playonline">
+                <% } else { %>
+                    href="/playoffline">
+                <% } %>
+                    <button>play</button>
+                </a>
+            </div>
+            <div class="leaderboard">
+                <h3>Leaderboard</h3>
+                <div class="lists">
+                    <ol>
+                        <% topUsers.forEach(user => { %>
+                            <li><%= user.username %></li>
+                        <% }); %>
+                    </ol>
+                    <ul>
+                        <% topUsers.forEach(user => { %>
+                            <li><%= user.score %></li>
+                        <% }); %>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

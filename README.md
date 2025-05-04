@@ -14,7 +14,7 @@ Enviorment Variables:
 - DB_HOST=localhost
 - DB_USER=root
 - DB_PASSWORD=your_mysql_password
-- DB_NAME=socialcircles
+- DB_NAME=GameDB
 
 Install Dependencies:
 - npm install
