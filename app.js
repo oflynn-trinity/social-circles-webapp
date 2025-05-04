@@ -1,10 +1,18 @@
 const express = require('express');
 const app = express();
-//app.use(express.urlencoded({ extended: true }));
 const path = require('path');
+const session = require('express-session');
+const indexRouter = require('./routes/index');
+const accountRoutes = require('./routes/accountRoutes');
+require('dotenv').config();
+
 module.exports = app;
 
-const session = require('express-session');
+// Setup middleware in correct order:
+app.use(express.urlencoded({ extended: true })); // <-- Move this UP
+app.use(express.json());                         // <-- Move this UP
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(session({
   secret: 'secret',
   resave: false,
@@ -12,36 +20,13 @@ app.use(session({
   cookie: { secure: false }
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-const indexRouter = require('./routes/index');
-const accountRoutes = require('./routes/accountRoutes');
-app.use('/', accountRoutes);
-
-require('dotenv').config();
-
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// Register routes AFTER middleware is set up
+app.use('/', accountRoutes);
 app.use('/', indexRouter);
 
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
-
-// Import routes
-//const sessionRoutes = require('./routes/sessionRoutes');
-//app.use('/session', sessionRoutes);
-
-// Default route
-//app.get('/', (req, res) => {
-// res.sendFile(path.join(__dirname, 'public/index.html'));
-//});
-
-//const PORT = process.env.PORT || 3000;
-//app.listen(PORT, () => {
-//console.log(`Server running at http://localhost:${PORT}`);
-//});
