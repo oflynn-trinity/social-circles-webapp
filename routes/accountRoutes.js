@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  const sql = `SELECT * FROM Account WHERE username = ?`;
+  const sql = `SELECT * FROM Account WHERE active = 1`;
   db.query(sql, [username], (err, result) => {
     if (err) throw err;
 
@@ -87,6 +87,24 @@ router.post('/change-password', (req, res) => {
     db.query(updateSql, [newHashedPassword, username], (err, result) => {
       if (err) throw err;
       res.redirect('/account');
+    });
+  });
+});
+
+router.post('/delete-account', (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).send('You must be logged in to delete your account.');
+  }
+
+  const username = req.session.user.username;
+  const sql = `UPDATE Account SET active = 0 WHERE username = ?`;
+  
+  db.query(sql, [username], (err, result) => {
+    if (err) throw err;
+    
+    req.session.destroy(err => {
+      if (err) throw err;
+      res.redirect('/');
     });
   });
 });
