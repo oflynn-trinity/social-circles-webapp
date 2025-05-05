@@ -397,7 +397,7 @@ button{
 }
 
 .social-circle:hover{
-    background-color: rgba(255, 255, 255, 0.934);
+    background-color: white;
     color:#131515;
 }
 
@@ -408,6 +408,7 @@ button{
 
 .selected-circle:hover{
     background-color: #F4D35E;
+    color: black;
 }
 
 #social-circle-bottom{

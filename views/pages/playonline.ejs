@@ -138,9 +138,11 @@
 
             selectedChars.forEach(character =>{
                 score += characterMap.get(character).likes[actionIndex];
+                console.log(characterMap.get(character).name + " : " + score);
             });
 
             selectedCircle.classList.remove("selected-circle");
+            setColors();
 
             fetch('/update-score', {
                     method: 'POST',
@@ -151,7 +153,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Score updated:', data);
+                    console.log('Score updated:', score);
                 })
                 .catch(error => console.error('Error updating score:', error));
 
@@ -174,11 +176,21 @@
         
             circles.forEach(circle => {
                 circle.addEventListener("click", function () {
-
                     circles.forEach(c => c.classList.remove("selected-circle"));
                     this.classList.add("selected-circle");
-
+                    setColors();
                 });
+
+
+                circle.addEventListener("mouseover", function() {
+                    this.style.color = "black";
+                });
+
+                circle.addEventListener("mouseout", function() {
+                    if(!this.classList.contains('selected-circle')){
+                        this.style.color = "#F4D35E";
+                    }
+                })
             });
 
             actions.forEach(action => {
@@ -191,6 +203,15 @@
             });
         });
 
+
+        function setColors(){
+            const selected = document.querySelectorAll(".selected-circle");
+            const unselected = document.querySelectorAll(".social-circle:not(.selected-circle)");
+
+            selected.forEach(s => { s.style.color = "black"; });
+
+            unselected.forEach(us => { us.style.color = "#F4D35E"; })
+        }
 
       </script>
 </body>
