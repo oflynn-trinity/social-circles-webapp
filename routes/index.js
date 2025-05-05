@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
   let sql = `
     SELECT username, score
     FROM Account
+    WHERE active = 1
     ORDER BY score DESC
     LIMIT 10;
   `;
