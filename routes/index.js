@@ -83,91 +83,94 @@ router.get('/characters', (req, res) => {
 
 router.get('/login', (req, res) => {
   if(req.session.user) res.redirect('/account');
-  res.render('pages/login', { title: 'Login' });
+  res.render('pages/login', { title: 'Login', error: undefined});
 });
 
 router.get('/createaccount', (req, res) => {
   if(req.session.user) res.redirect('/account');
-  res.render('pages/createaccount', { title : 'Create Account'});
+  res.render('pages/createaccount', { title : 'Create Account', error: undefined});
 });
 
 router.get('/editaccount', (req, res) => {
   if(!req.session.user) res.redirect('/login');
-  res.render('pages/editaccount', { title : 'Edit Account'});
+  res.render('pages/editaccount', { title : 'Edit Account', error: undefined});
 });
 
 router.get('/playoffline', (req, res) => {
-  if(req.session.user) res.redirect('/playonline');
+  if(req.session.user){res.redirect('/playonline');}
+  else{
+    const sqlChars = `
+    SELECT name, thumbnail_url, likes_compliments, likes_help, likes_events
+    FROM Characters;
+    `;
 
-  const sqlChars = `
-  SELECT name, thumbnail_url, likes_compliments, likes_help, likes_events
-  FROM Characters;
-  `;
+    db.query(sqlChars,(err, charResult) => {
+      if(err) throw err;
 
-  db.query(sqlChars,(err, charResult) => {
-    if(err) throw err;
+      let chars = [];
 
-    let chars = [];
+      charResult.forEach(character => {
+        chars.push({
+          name: character.name,
+          thumbnail_url: character.thumbnail_url,
+          likes: [
+            character.likes_compliments,
+            character.likes_help,
+            character.likes_events
+          ]
+        });
+      });
 
-    charResult.forEach(character => {
-      chars.push({
-        name: character.name,
-        thumbnail_url: character.thumbnail_url,
-        likes: [
-          character.likes_compliments,
-          character.likes_help,
-          character.likes_events
-        ]
+      res.render('pages/playoffline', { 
+        title: 'Play Game',
+        chars
       });
     });
-
-    res.render('pages/playoffline', { 
-      title: 'Play Game',
-      chars
-    });
-  });
+  }
 });
 
 router.get('/playonline', (req, res) => {
-  if(!req.session.user) res.redirect('/playoffline');
-  const sqlChars = `
-  SELECT name, thumbnail_url, likes_compliments, likes_help, likes_events
-  FROM Characters;
-  `;
-
-  db.query(sqlChars,(err, charResult) => {
-    if(err) throw err;
-
-    let chars = [];
-
-    charResult.forEach(character => {
-      chars.push({
-        name: character.name,
-        thumbnail_url: character.thumbnail_url,
-        likes: [
-          character.likes_compliments,
-          character.likes_help,
-          character.likes_events
-        ]
-      });
-    });
-
-    const username = req.session.user.username;
-    const sqlUser = `
-    SELECT score FROM Account WHERE username = ?;
+  if(!req.session.user) {res.redirect('/playoffline');}
+  else{
+    const sqlChars = `
+    SELECT name, thumbnail_url, likes_compliments, likes_help, likes_events
+    FROM Characters;
     `;
 
-    db.query(sqlUser, username, (err, scoreResult) => {
+    db.query(sqlChars,(err, charResult) => {
       if(err) throw err;
 
-      res.render('pages/playonline', { 
-        title: 'Play Game',
-        chars,
-        username,
-        userScore: scoreResult[0].score
+      let chars = [];
+
+      charResult.forEach(character => {
+        chars.push({
+          name: character.name,
+          thumbnail_url: character.thumbnail_url,
+          likes: [
+            character.likes_compliments,
+            character.likes_help,
+            character.likes_events
+          ]
+        });
+      });
+
+      const username = req.session.user.username;
+      const sqlUser = `
+      SELECT score FROM Account WHERE username = ?;
+      `;
+
+      db.query(sqlUser, username, (err, scoreResult) => {
+        if(err) throw err;
+
+        res.render('pages/playonline', { 
+          title: 'Play Game',
+          chars,
+          username,
+          userScore: scoreResult[0].score
+        });
       });
     });
-  });
+  }
 });
 
 router.post('/update-score', (req, res) => {

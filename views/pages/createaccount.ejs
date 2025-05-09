@@ -24,6 +24,11 @@
     </header>
     <div class="body">
         <div class="login-box">
+            <% if(error != undefined) { %>
+                <div class="error-message">
+                    <h3 style="color: red;"><%=error%></h3>
+                </div>
+            <% } %> 
             <form action="/register" method="post">
                 <input type="text" name="username" placeholder="username...">
                 <input type="password" name="password" placeholder="password...">

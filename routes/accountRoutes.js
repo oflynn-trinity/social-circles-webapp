@@ -9,11 +9,11 @@ router.post('/register', (req, res) => {
   const { username, password, confirm_password } = req.body;
 
   if (!username || !password || !confirm_password) {
-    return res.status(400).send('Username, password and confirmation are required.');
+    return  res.render('pages/createaccount', { title : 'Create Account', error: "Please fill in all fills"});
   }
 
   if (password !== confirm_password) {
-    return res.status(400).send('Passwords do not match.');
+    return  res.render('pages/createaccount', { title : 'Create Account', error: "Incorrect Password"});
   }
 
   // Check if username already exists
@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
     if (err) throw err;
 
     if (result.length > 0) {
-      return res.status(400).send('Username already exists.');
+      return res.render('pages/createaccount', { title : 'Create Account', error: "Username already exists"});
     }
 
     // Proceed with adding account
@@ -48,21 +48,23 @@ router.post('/login', (req, res) => {
     if (err) throw err;
 
     if (result.length === 0) {
-      return res.send('Invalid username or password.');
+      let errorMsg ="No Such Username"
+      res.render('pages/login', { title: 'Login', error: errorMsg});
+    }else{ 
+      const user = result[0];
+
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+
+        if (isMatch) {
+          req.session.user = { username: user.username };
+          res.redirect('/playonline');
+        } else {
+          errorMsg = "Incorrect Paswword";
+          res.render('pages/login', { title: 'Login', error: errorMsg});
+        }
+      });
     }
-
-    const user = result[0];
-
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err) throw err;
-
-      if (isMatch) {
-        req.session.user = { username: user.username };
-        res.redirect('/playonline');
-      } else {
-        res.send('Invalid username or password.');
-      }
-    });
   });
 });
 
@@ -77,11 +79,11 @@ router.post('/change-username', (req, res) => {
   const { newUsername } = req.body;
 
   if (!newUsername) {
-    return res.status(401).send('Username cannot be blank.');
+    return res.render('pages/editaccount', { title : 'Edit Account', error: 'Username cannot be blank.'});
   }
 
   if (!req.session.user) {
-    return res.status(401).send('You must be logged in to change your username.');
+    return res.render('pages/editaccount', { title : 'Edit Account', error: 'You must be logged in to change your username.'});
   }
   const currentUsername = req.session.user.username;
 
@@ -91,7 +93,7 @@ router.post('/change-username', (req, res) => {
     if (err) throw err;
 
     if (result.length > 0) {
-      return res.status(400).send('Username already exists.');
+      return res.render('pages/editaccount', { title : 'Edit Account', error: 'Username already exists.'});
     }
 
     // If username doesn't exist, proceed with update
@@ -109,17 +111,17 @@ router.post('/change-password', (req, res) => {
   const { newPassword, confirm_new_password } = req.body;
 
   if (!req.session.user) {
-    return res.status(401).send('You must be logged in to change your password.');
+    return res.render('pages/editaccount', { title : 'Edit Account', error: 'You must be logged in to change your password.'});
   }
 
   const username = req.session.user.username;
 
   if (!newPassword || !confirm_new_password) {
-    return res.status(400).send('Password and confirmation are required.');
+    return res.render('pages/editaccount', { title : 'Edit Account', error: 'Password and confirmation are required.'});    
   }
 
   if (newPassword !== confirm_new_password) {
-    return res.status(400).send('Passwords do not match.');
+    return res.render('pages/editaccount', { title : 'Edit Account', error: 'Passwords do not match.'});    
   }
 
   bcrypt.hash(newPassword, 10, (err, newHashedPassword) => {
