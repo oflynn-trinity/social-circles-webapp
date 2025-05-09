@@ -7,6 +7,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Spicy+Rice&display=swap" rel="stylesheet">    
 </head>
+<script>
+    function validateForm(){
+        let x = document.forms["loginForm"]["username"].value; 
+        if(x === ""){
+            alert("Please enter a username")
+            return false;
+        }
+
+        x = document.forms["loginForm"]["password"].value;
+        if(x === ""){
+            alert("Please enter a password");
+            return false;
+        }
+    }
+</script>
+
 <body>
     <header>
         <a class="title" href="/">
@@ -24,7 +40,12 @@
     </header>
     <div class="body">
         <div class="login-box">
-            <form action="/login" method="post">
+            <% if(error != undefined) { %>
+                <div class="error-message">
+                    <h3 style="color: red;"><%=error%></h3>
+                </div>
+            <% } %> 
+            <form name="loginForm" action="/login" method="post" onsubmit="return validateForm();">
                 <input type="text" name="username" placeholder="username...">
                 <input type="password" name="password" placeholder="password...">
                 <input type="submit" value="log in">

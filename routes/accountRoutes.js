@@ -13,10 +13,21 @@ router.post('/register', (req, res) => {
 
     const sql = `INSERT INTO Account (username, password) VALUES (?, ?)`;
     db.query(sql, [username, hashedPassword], (err, result) => {
-      if (err) throw err;
-
-      req.session.user = { username: username };
-      res.redirect('/playonline');
+      if (err) {
+        let duplicSQL = `select username from Account where username = ` 
+        + db.escape(username) + `;`;
+        db.query(duplicSQL, (err,result) =>{
+          if(err) throw err;
+          
+          if(result[0].length != 0){
+            res.render('pages/createaccount', { title : 'Create Account', error: 'Duplicate Username'});
+          }
+        })
+      }
+      else {
+        req.session.user = { username: username };
+        res.redirect('/playonline');
+      }
     });
   });
 });
@@ -29,21 +40,23 @@ router.post('/login', (req, res) => {
     if (err) throw err;
 
     if (result.length === 0) {
-      return res.send('Invalid username or password.');
+      let errorMsg ="No Such Username"
+      res.render('pages/login', { title: 'Login', error: errorMsg});
+    }else{ 
+      const user = result[0];
+
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+
+        if (isMatch) {
+          req.session.user = { username: user.username };
+          res.redirect('/playonline');
+        } else {
+          errorMsg = "Incorrect Paswword";
+          res.render('pages/login', { title: 'Login', error: errorMsg});
+        }
+      });
     }
-
-    const user = result[0];
-
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err) throw err;
-
-      if (isMatch) {
-        req.session.user = { username: user.username };
-        res.redirect('/playonline');
-      } else {
-        res.send('Invalid username or password.');
-      }
-    });
   });
 });
 
