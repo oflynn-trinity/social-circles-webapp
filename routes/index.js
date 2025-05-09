@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
   let sql = `
     SELECT username, score
     FROM Account
+    WHERE active = 1
     ORDER BY score DESC
     LIMIT 10;
   `;
@@ -92,7 +93,7 @@ router.get('/createaccount', (req, res) => {
 
 router.get('/editaccount', (req, res) => {
   if(!req.session.user) res.redirect('/login');
-  res.render('pages/editaccount', { title : 'Edit Account'});
+  res.render('pages/editaccount', { title : 'Edit Account', error: undefined});
 });
 
 router.get('/playoffline', (req, res) => {

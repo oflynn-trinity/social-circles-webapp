@@ -24,12 +24,18 @@
     </header>
     <div class="body">
         <div class="login-box">
+            <% if(error != undefined) { %>
+                <div class="error-message">
+                    <h3 style="color: red;"><%=error%></h3>
+                </div>
+            <% } %> 
             <form action="/change-username" method="post">
                 <input type="text" name="newUsername" placeholder="username...">
                 <input type="submit" value="change username">
             </form>
             <form action="/change-password" method="post">
                 <input type="password" name="newPassword" placeholder="password...">
+                <input type="password" name="confirm_new_password" placeholder="confirm password">
                 <input type="submit" value="change password">
             </form>
         </div>
